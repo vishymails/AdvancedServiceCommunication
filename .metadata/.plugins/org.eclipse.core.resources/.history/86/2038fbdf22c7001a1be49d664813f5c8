@@ -1,0 +1,37 @@
+package com.ibm;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+public class PathologyResource {
+
+	
+	List<Disease> diseases = Arrays.asList(
+			new Disease("D1", "Astama", "Warm Water Bath"),
+			new Disease("D2", "Headache", "Hot Water Vapour"),
+			new Disease("D3", "Corona", "Wash Hands Properly")
+    );
+	
+	@RequestMapping("/diseases")
+	public DiseaseList Diseases() {
+		EmployeeList employeeList = new EmployeeList();
+		
+		employeeList.setEmployees(employees);
+		return employeeList;
+	}
+	
+	
+	@RequestMapping("/employees/{Id}")
+	public Employee getEmployeeById(@PathVariable("Id") String Id) {
+		Employee e = employees.stream()
+				     .filter(employee -> Id.equals(employee.getId()))
+ 					 .findAny()
+ 					 .orElse(null);
+		
+		return e;
+	}
+	
+}
